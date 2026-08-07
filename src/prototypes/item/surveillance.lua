@@ -2,7 +2,7 @@ data:extend({
     {
         type = "item",
         name = "big_brother-surveillance-center",
-        icon = "__big-brother__/graphics/icons/surveillance.png",
+        icon = "__big-brother-continued__/graphics/icons/surveillance.png",
         icon_size = 32,
         subgroup = "defensive-structure",
         order = "d[radar]-a[surveillance]",

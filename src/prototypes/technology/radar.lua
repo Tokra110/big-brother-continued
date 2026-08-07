@@ -3,7 +3,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"military", "lamp"},
@@ -19,7 +19,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-2",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-amplifier"},
@@ -37,7 +37,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-3",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-amplifier-2", "circuit-network"},
@@ -55,7 +55,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-4",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-amplifier-3", "modules"},
@@ -73,7 +73,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-5",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-amplifier-4"},
@@ -92,7 +92,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-6",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"productivity-module-2", "radar-amplifier-5"},
@@ -111,7 +111,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-7",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"effect-transmission", "radar-amplifier-6"},
@@ -131,7 +131,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-8",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"productivity-module-3", "radar-amplifier-7"},
@@ -151,7 +151,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-amplifier-9",
-        icon = "__big-brother__/graphics/icons/radar-amplifier.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-amplifier.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-amplifier-8"},
@@ -172,7 +172,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"military", "lamp"},
@@ -188,7 +188,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-2",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency"},
@@ -206,7 +206,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-3",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-2", "advanced-circuit"},
@@ -224,7 +224,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-4",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-3", "laser"},
@@ -242,7 +242,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-5",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-4", "processing-unit"},
@@ -261,7 +261,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-6",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-5", "efficiency-module-2"},
@@ -280,7 +280,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-7",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-6", "efficiency-module-3"},
@@ -300,7 +300,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-8",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-7"},
@@ -320,7 +320,7 @@ data:extend(
     {
         type = "technology",
         name = "radar-efficiency-9",
-        icon = "__big-brother__/graphics/icons/radar-efficiency.png",
+        icon = "__big-brother-continued__/graphics/icons/radar-efficiency.png",
         icon_size = 128,
         effects = { },
         prerequisites = {"radar-efficiency-8"},
@@ -341,7 +341,7 @@ data:extend(
     {
         type = "technology",
         name = "surveillance",
-        icon = "__big-brother__/graphics/icons/tech_surveillance.png",
+        icon = "__big-brother-continued__/graphics/icons/tech_surveillance.png",
         icon_size = 128,
         effects = {
             {
@@ -364,7 +364,7 @@ data:extend(
     {
         type = "technology",
         name = "surveillance-2",
-        icon = "__big-brother__/graphics/icons/tech_surveillance.png",
+        icon = "__big-brother-continued__/graphics/icons/tech_surveillance.png",
         icon_size = 128,
         upgrade = true,
         effects = { },

@@ -109,7 +109,8 @@ end
 function Entity.set_indestructible(entity, mode)
     fail_if_missing(entity, "missing entity argument")
     mode = mode == false and true or false
-    entity.minable = mode
+    -- LuaEntity.minable is read-only in Factorio 2.1. Hidden helper
+    -- entities that must not be mined declare that in their prototype.
     entity.destructible = mode
     return entity
 end

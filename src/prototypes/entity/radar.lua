@@ -17,6 +17,7 @@ for radar_amplification_type = 0, 9 do
         radar.energy_usage = (300 + extra_energy_cost) .. "kW"
         radar.order ="d-c"
         radar.localised_name = {"entity-name.radar"}
+        radar.placeable_by = {item = "radar", count = 1}
 
         table.insert(radars, radar)
     end

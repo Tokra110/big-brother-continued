@@ -8,7 +8,8 @@ require 'stdlib/utils/string'
 require 'stdlib/utils/table'
 require 'scheduler'
 
-Event.register({defines.events.on_built_entity, defines.events.on_robot_built_entity}, function(event)
+Event.register({defines.events.on_built_entity, defines.events.on_robot_built_entity,
+    defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
     local entity = event.entity
     local type = entity.type
     local name = entity.name
@@ -37,7 +38,8 @@ Event.register({defines.events.on_built_entity, defines.events.on_robot_built_en
     end
 end)
 
-Event.register({defines.events.on_entity_died, defines.events.on_robot_pre_mined, defines.events.on_player_mined_entity}, function(event)
+Event.register({defines.events.on_entity_died, defines.events.on_robot_pre_mined,
+    defines.events.on_player_mined_entity, defines.events.script_raised_destroy}, function(event)
     local entity = event.entity
     local type = entity.type
     local name = entity.name
@@ -51,9 +53,7 @@ Event.register({defines.events.on_entity_died, defines.events.on_robot_pre_mined
         remove_surveillance(entity, true)
     elseif name == 'big_brother-surveillance-center' then
         local force = entity.force
-        Scheduler.add(nil, function(event)
-            update_all_surveillance(force)
-        end)
+        Scheduler.add('surveillance-' .. force.name, 'update_all_surveillance', force.name)
     elseif type == 'radar' then
         local radar_data = Entity.set_data(entity, nil)
         if radar_data and radar_data.blueprint_radar and radar_data.blueprint_radar.valid then
@@ -94,11 +94,38 @@ end)
 
 -- Scan the map once if the mod is updated
 Event.register({Event.core_events.init, Event.core_events.configuration_changed}, function(event)
+    storage.radars = {}
+    storage.vehicles = {}
+    storage.trains = {}
+    storage.power_poles = {}
+    storage.surveillance_centers = {}
+    storage.following = {}
+
     -- start tracking all important entities
     table.each(game.surfaces, function(surface)
-        -- track all radars
-        local radars = surface.find_entities_filtered({name = 'radar'})
-        table.each(radars, function(entity) track_entity('radars', entity) end)
+        -- Track vanilla and already-upgraded radars. Remove the invisible proxy
+        -- entities used by older versions; upgraded radars are directly
+        -- placeable by the normal radar item now.
+        local radars = surface.find_entities_filtered({type = 'radar'})
+        table.each(radars, function(entity)
+            if not entity.valid then return end
+            if entity.name == 'radar' or entity.name:starts_with('big_brother-radar_') then
+                local radar_data = Entity.set_data(entity, nil)
+                if radar_data and radar_data.blueprint_radar and radar_data.blueprint_radar.valid then
+                    radar_data.blueprint_radar.destroy()
+                end
+                track_entity('radars', entity)
+            elseif entity.name == 'big_brother-blueprint-radar' then
+                entity.destroy()
+            elseif entity.name == 'big_brother-surveillance-center' then
+                track_entity('surveillance_centers', entity)
+            elseif entity.name == 'big_brother-surveillance-small' then
+                -- Storage belongs to the previous mod identifier and cannot be
+                -- read after switching. Rebuild these hidden helper entities
+                -- from the tracked big electric poles below.
+                entity.destroy()
+            end
+        end)
 
         -- track all vehicles
         local vehicles = surface.find_entities_filtered({type = 'car'})
@@ -110,20 +137,25 @@ Event.register({Event.core_events.init, Event.core_events.configuration_changed}
 
         -- track all big-electric-poles
         local power_poles = surface.find_entities_filtered({name = 'big-electric-pole'})
-        table.each(power_poles, function(entity) track_entity('power_poles', entity) end)
+        table.each(power_poles, function(entity)
+            local pole_data = Entity.set_data(entity, nil)
+            if pole_data and pole_data.surveillance and pole_data.surveillance.valid then
+                pole_data.surveillance.destroy()
+            end
+            track_entity('power_poles', entity)
+        end)
     end)
 
     -- upgrade radars
     table.each(game.forces, upgrade_radars)
+    table.each(game.forces, update_all_surveillance)
 end)
 
 Event.register(defines.events.on_research_finished, function(event)
     local tech_name = event.research.name
     local force = event.research.force
     if tech_name:starts_with('radar-amplifier') or tech_name:starts_with('radar-efficiency') then
-        Scheduler.add(force.name, function(event)
-            upgrade_radars(force)
-        end)
+        Scheduler.add('radars-' .. force.name, 'upgrade_radars', force.name)
     elseif tech_name == 'surveillance-2' then
         if storage.power_poles and storage.surveillance_centers then
             update_all_surveillance(force)
@@ -183,22 +215,30 @@ function upgrade_radar_entity(radar, radar_efficiency_level, radar_amplifier_lev
     local radar_efficiency_level = radar_efficiency_level or calculate_tech_level(force, 'radar-efficiency', 9)
     local radar_amplifier_level = radar_amplifier_level or calculate_tech_level(force, 'radar-amplifier', 9)
     local radar_name = 'big_brother-radar_ra-' .. radar_amplifier_level .. '_re-' .. radar_efficiency_level
+    if radar.name == radar_name then return radar end
     local pos = radar.position
     local direction = radar.direction
     local health = radar.health
+    local quality = radar.quality
     local surface = radar.surface
     local radar_data = Entity.set_data(radar, nil)
-    radar.destroy()
 
-    if not radar_data then
-        local blueprint_radar = surface.create_entity({ name = 'big_brother-blueprint-radar', position = pos, direction = direction, force = force})
-        Entity.set_frozen(blueprint_radar)
-        Entity.set_indestructible(blueprint_radar)
-        radar_data = { blueprint_radar = blueprint_radar }
+    if radar_data and radar_data.blueprint_radar and radar_data.blueprint_radar.valid then
+        radar_data.blueprint_radar.destroy()
     end
-    local new_radar = surface.create_entity({ name = radar_name, position = pos, direction = direction, force = force})
+
+    local new_radar = surface.create_entity({
+        name = radar_name,
+        position = pos,
+        direction = direction,
+        force = force,
+        quality = quality,
+        fast_replace = true,
+        spill = false,
+        create_build_effect_smoke = false,
+    })
+    if not new_radar then return radar end
     new_radar.health = health
-    Entity.set_data(new_radar, radar_data)
 
     return new_radar
 end

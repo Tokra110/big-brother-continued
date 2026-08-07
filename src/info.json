@@ -1,9 +1,9 @@
 {
-  "name": "big-brother",
-  "version": "2.0.0",
-  "title": "Big Brother 2.0",
-  "author": "kubiix, Afforess, pw_sys",
-  "description": "Big Brother - Research radar upgrades in amplification, efficiency, and surveillance capabilities. Create the ultimate surveillance state.",
-  "factorio_version": "2.0",
-  "dependencies": ["base >= 2.0"]
+  "name": "big-brother-continued",
+  "version": "2.1.0",
+  "title": "Big Brother Continued",
+  "author": "Afforess, pw_sys, kubiix, Tokra110, contributors",
+  "description": "Research radar amplification, efficiency, and surveillance capabilities. A Factorio 2.1 continuation of Big Brother, compatible with factories using the 2.0 WIP fork.",
+  "factorio_version": "2.1",
+  "dependencies": ["base >= 2.1.7", "! big-brother", "! Big_Brother"]
 }

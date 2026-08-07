@@ -2,10 +2,9 @@ require 'stdlib/event/event'
 
 Scheduler = {}
 
-function Scheduler.add(key, func)
+function Scheduler.add(key, task_name, force_name)
     if not storage.scheduled_tasks then
         storage.scheduled_tasks = {}
-        Scheduler._setup()
     end
     if key then
         for _, task in pairs(storage.scheduled_tasks) do
@@ -14,7 +13,11 @@ function Scheduler.add(key, func)
             end
         end
     end
-    table.insert(storage.scheduled_tasks, { key = key, func = func })
+    table.insert(storage.scheduled_tasks, {
+        key = key,
+        task_name = task_name,
+        force_name = force_name,
+    })
     return true
 end
 
@@ -25,20 +28,17 @@ function Scheduler._tick(event)
         storage.scheduled_tasks = {}
         -- execute queued tasks
         for _, task in pairs(tasks) do
-            task.func(event)
+            local force = game.forces[task.force_name]
+            if force then
+                if task.task_name == 'upgrade_radars' then
+                    upgrade_radars(force)
+                elseif task.task_name == 'update_all_surveillance' then
+                    update_all_surveillance(force)
+                end
+            end
         end
-        -- tasks may have been added above, in the event loop, if not, disable scheduler
-        if #storage.scheduled_tasks == 0 then
-            storage.scheduled_tasks = nil
-            Event.remove(defines.events.on_tick, event._handler)
-        end
+        if #storage.scheduled_tasks == 0 then storage.scheduled_tasks = nil end
     end
 end
 
-function Scheduler._setup()
-    if storage.scheduled_tasks then
-        Event.register(defines.events.on_tick, Scheduler._tick)
-    end
-end
-
-Event.register(Event.core_events.load, Scheduler._setup)
+Event.register(defines.events.on_tick, Scheduler._tick)

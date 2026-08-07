@@ -157,7 +157,9 @@ function Event.dispatch(event)
                 setmetatable(event, {__index = {_handler = handler}})
 
                 -- Call the handler
-                local success, err = pcall(handler, event)
+                local success, err = xpcall(handler, function(message)
+                    return debug.traceback(message, 2)
+                end, event)
 
                 -- If the handler errors lets make sure someone notices
                 if not success then
