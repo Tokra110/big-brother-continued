@@ -1,6 +1,24 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.1.0
+Date: 2026-08-07
+  Info:
+    - Continued the mod for Factorio 2.1 under the big-brother-continued identifier.
+    - Existing factories can switch from big-brother by disabling it and enabling this mod.
+  Changes:
+    - Rebuild runtime tracking for existing upgraded radars, surveillance centers, vehicles,
+      trains, and big electric poles when the mod configuration changes.
+    - Preserve radar health and quality during research upgrades.
+    - Make upgraded radars directly blueprintable and placeable using the normal radar item.
+    - Support entities created or destroyed through script-raised events.
+    - Restore the French locale to the correct directory and repair German UTF-8 text.
+  Bugfixes:
+    - Prevent scheduled tasks from storing Lua functions in save data.
+    - Remove the obsolete write to the read-only LuaEntity.minable property.
+    - Ignore invalid entity handles encountered while migrating older saves.
+    - Remove legacy invisible blueprint proxy radars during migration.
+---------------------------------------------------------------------------------------------------
 Version: 2.0.0
-Date: 2020-12-10
+Date: 2024-10-29
   Info:
     - Factorio 2.0 support
 ---------------------------------------------------------------------------------------------------

@@ -1,12 +1,12 @@
 local file_names = {}
 for i = 0, 63 do
-    table.insert(file_names, "__big-brother__/graphics/entity/surveillance/tile-" .. i .. ".png")
+    table.insert(file_names, "__big-brother-continued__/graphics/entity/surveillance/tile-" .. i .. ".png")
 end
 data:extend({
     {
         type = "radar",
         name = "big_brother-surveillance-center",
-        icon = "__big-brother__/graphics/icons/surveillance.png",
+        icon = "__big-brother-continued__/graphics/icons/surveillance.png",
         icon_size = 32,
         flags = {"placeable-player", "player-creation"},
         minable = {hardness = 0.2, mining_time = 0.5, result = "big_brother-surveillance-center"},
@@ -54,7 +54,7 @@ data:extend({
     {
         type = "radar",
         name = "big_brother-surveillance-small",
-        icon = "__big-brother__/graphics/icons/surveillance.png",
+        icon = "__big-brother-continued__/graphics/icons/surveillance.png",
         icon_size = 32,
         order = 'd-f',
         max_health = 100,
