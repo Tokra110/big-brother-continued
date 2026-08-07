@@ -11,5 +11,7 @@
   the migrated factory then saved, reloaded, and passed runtime assertions again.
 - A copy of David's `Space I guess.zip` also loaded with the full current mod set
   after replacing `big-brother` with `big-brother-continued`.
-- Publication remains pending the public GitHub repository and the final user
-  upload through the Mod Portal website.
+- Published the source repository at
+  `https://github.com/Tokra110/big-brother-continued` and the verified 2.1.0
+  archive as GitHub release `v2.1.0`.
+- The final Mod Portal entry remains pending David's logged-in submission.
