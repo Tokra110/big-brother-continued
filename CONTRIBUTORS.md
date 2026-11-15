@@ -11,7 +11,7 @@ Big Brother Continued exists because of work contributed across the original mod
 - `sign-out`: Factorio 1.1 compatibility
 - Cameron McAvoy: historical repository contribution
 - `kubiix`: Factorio 2.0 WIP port
-- Takács-Tolnai Dávid (`Tokra110`): Factorio 2.1 continuation and maintenance
+- `Tokra110`: Factorio 2.1 continuation and maintenance
 
 ## Additional credited contributions
 
